@@ -1,6 +1,6 @@
-Drop SCHEMA `employee_management` IF EXISTS;
+Drop SCHEMA IF EXISTS `employee_management` ;
 CREATE SCHEMA `employee_management` ;
- --create dept
+ -- create dept
 CREATE TABLE `employee_management`.`departments` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(30) NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE `employee_management`.`roles` (
     REFERENCES `employee_management`.`departments` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION);
- --create employees
+ -- create employees
 CREATE TABLE `employee_management`.`employees` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `first_name` VARCHAR(30) NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE `employee_management`.`employees` (
     ON DELETE CASCADE
     ON UPDATE NO ACTION);
 
---add manager 
+-- add manager 
 
 ALTER TABLE `employee_management`.`employees` 
 ADD INDEX `fk_employees_manager_idx` (`manager_id` ASC) VISIBLE;

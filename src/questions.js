@@ -1,11 +1,5 @@
-
 const inquirer = require('inquirer');
-const mysql = require('mysql2');
-const {createRole, getRoles} = require("./src/roles");
-const {createEmployee, getEmployees} = require("./src/employees")
-const connectDb = require("./database/connect");
-// const askUser = require("./src/questions");
-
+const { getDepartments, deleteAllDepartments} = require("./departments");
 function askUser(){
     return inquirer.prompt([{
         message: "What would you like to do",
@@ -51,24 +45,6 @@ function askUser(){
           }
     });
 }
-async function getDepartments(){
-    
- const connection= await connectDb();
-
-    // console.log("3")
-    //  db.query('SELECT * FROM departments;', function (err, results) {
-    // if (err) console.log(err);   
-    const [rows, fields] = await connection.execute('SELECT * FROM `departments`');
-    console.table(rows);
-    askUser();
-   connection.end();
-    // test();
-    
-    //   });
-    // const results = db.execute("SELECT * FROM `employee_management`.`departments`;");
-    // console.log("4")
-    // return results;
-}
 
 // function viewDepartments() {
 //     getDepartments();
@@ -78,12 +54,4 @@ async function getDepartments(){
    
    
 //    }
-module.exports = askUser;
-
-
-
-
-askUser();
-
-
 module.exports = askUser;

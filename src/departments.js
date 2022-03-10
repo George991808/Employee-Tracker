@@ -1,5 +1,7 @@
+const askUser = require("./questions");
 const { restoreDefaultPrompts } = require("inquirer");
 const connectDb = require("../database/connect");
+const mysql = require('mysql2/promise');
 
 
 /**
@@ -13,13 +15,28 @@ async function createDepartment(name){
         'INSERT INTO `departments` (`name`) VALUES (?)', 
         [name]
     );
+     connection.end();
     return(1);
 }
 /**
  * getting all departments from db
  */
-function getDepartments(id){
+ function getDepartments(){
+    
+    // const connection= await connectDb();
 
+    // console.log("3")
+    //  db.query('SELECT * FROM departments;', function (err, results) {
+    // if (err) console.log(err);   
+    // const [rows, fields] = await connection.execute('SELECT * FROM `departments`');
+    // console.table(rows);
+    // connection.end();
+    // test();
+    
+    //   });
+    // const results = db.execute("SELECT * FROM `employee_management`.`departments`;");
+    // console.log("4")
+    // return results;
 }
 
 async function deleteAllDepartments(){
@@ -28,13 +45,15 @@ async function deleteAllDepartments(){
     
     const results = db.execute("TRUNCATE `employee_management`.`departments`;");
     db.execute("SET FOREIGN_KEY_CHECKS=1;");
-    return results;
+    connection.end();
+ 
+    // return results;
 }
 
+// getDepartments()
 
-
-module.exports ={
-    createDepartment,
+module.exports = {
+    // createDepartment,
     getDepartments,
     deleteAllDepartments,
-}
+};

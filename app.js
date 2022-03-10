@@ -1,8 +1,9 @@
 
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
-// const {createRole, getRoles} = require("./src/roles");
-// const {createEmployee, getEmployees} = require("./src/employees")
+const createDepartment = require("./src/roles");
+ const createRole = require("./src/roles");
+ const createEmployee = require("./src/employees")
 const connectDb = require("./database/connect");
 // const askUser = require("./src/questions");
 
@@ -33,6 +34,7 @@ function askUser(){
               // code block
            break;
             case "View All Employees":
+                getEmployees();
               // code block
           break;
             case "Add Department":
@@ -66,6 +68,15 @@ async function getRoles(){
     const connection= await connectDb();
     
        const [rows, fields] = await connection.execute('SELECT roles.id, roles.title, departments.name AS departments, salary FROM roles LEFT JOIN departments on roles.department_id = departments.id;');
+       console.table(rows);
+       askUser();
+      connection.end();
+   }
+   async function getEmployees(){
+    
+    const connection= await connectDb();
+    
+       const [rows, fields] = await connection.execute('SELECT employees.id, employees.first_name, employees.last_name,  FROM employees;');
        console.table(rows);
        askUser();
       connection.end();

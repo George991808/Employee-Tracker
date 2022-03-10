@@ -1,9 +1,9 @@
 
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
-const createDepartment = require("./src/roles");
- const createRole = require("./src/roles");
- const createEmployee = require("./src/employees")
+//const createDepartment = require("./src/departments");
+const createRole = require("./src/roles");
+const createEmployee = require("./src/employees")
 const connectDb = require("./database/connect");
 // const askUser = require("./src/questions");
 
@@ -44,8 +44,8 @@ function askUser(){
                   
                     name: 'name'
                 }]).then((answer) => {
-                    createDepartment(answer.name)
-                    askUser()
+                    createDepartment(answer.name);
+                    askUser();
                 });
               // code block
            break;
@@ -61,14 +61,14 @@ function askUser(){
                     message: "What is the salary of the new role?"
                   },
                   {
-                    type: "list",
+                    type: "input",
                     name: "roledepartment",
                     message: "What department number is the new role in?",
                     
-                  },
+                  }
             ]).then((answer) => {
-                    createRole(answer.rolename,answer.rolesalary, answer.roledepartment)
-                    askUser()
+                    createRole(answer.rolename,answer.rolesalary, answer.roledepartment);
+                    askUser();
                 });
                 
               // code block
@@ -85,14 +85,14 @@ function askUser(){
                     message: "WWhat is the last name of the new employee?"
                   },
                   {
-                    type: "list",
+                    type: "input",
                     name: "employeeRole",
                     message: "What employeeRole number does the new employee have?",
                     
-                  },
+                  }
             ]).then((answer) => {
-                    createEmployee(answer.rolename,answer.rolesalary, answer.roledepartment)
-                    askUser()
+                    createEmployee(answer.rolename,answer.rolesalary, answer.roledepartment);
+                    askUser();
                 });
                break;
             case "Update Employee Role":
@@ -101,13 +101,13 @@ function askUser(){
             default:
               // code block
           }
-    });
+    })
 }
 async function getDepartments(){
     
  const connection= await connectDb();
  
-    const [rows, fields] = await connection.execute('SELECT id, name FROM departments')
+    const [rows, fields] = await connection.execute('SELECT id, name FROM departments');
     console.table(rows);
     askUser();
    connection.end();
@@ -132,7 +132,16 @@ async function getRoles(){
    }
 
 
-module.exports = askUser;
+   async function createDepartment(name){
+    const connection =   await connectDb();
+
+    const [rows] =  await connection.execute(
+        'INSERT INTO `departments` (`name`) VALUES (?)', 
+        [name]
+    );
+     connection.end();
+
+}
 
 
 
@@ -140,4 +149,3 @@ module.exports = askUser;
 askUser();
 
 
-module.exports = askUser;

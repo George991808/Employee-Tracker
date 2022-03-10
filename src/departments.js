@@ -1,5 +1,5 @@
-const askUser = require("./questions");
-const { restoreDefaultPrompts } = require("inquirer");
+
+
 const connectDb = require("../database/connect");
 const mysql = require('mysql2/promise');
 
@@ -16,7 +16,7 @@ async function createDepartment(name){
         [name]
     );
      connection.end();
-    return(1);
+
 }
 /**
  * getting all departments from db
@@ -53,7 +53,7 @@ async function deleteAllDepartments(){
 // getDepartments()
 
 module.exports = {
-    // createDepartment,
+    createDepartment,
     getDepartments,
     deleteAllDepartments,
 };

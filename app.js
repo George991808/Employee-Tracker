@@ -45,14 +45,55 @@ function askUser(){
                     name: 'name'
                 }]).then((answer) => {
                     createDepartment(answer.name)
+                    askUser()
                 });
               // code block
            break;
             case "Add Role":
+                return inquirer.prompt([ {
+                    type: "input",
+                    name: "rolename",
+                    message: "What is the name of the new role?"
+                  },
+                  {
+                    type: "input",
+                    name: "rolesalary",
+                    message: "What is the salary of the new role?"
+                  },
+                  {
+                    type: "list",
+                    name: "roledepartment",
+                    message: "What department number is the new role in?",
+                    
+                  },
+            ]).then((answer) => {
+                    createRole(answer.rolename,answer.rolesalary, answer.roledepartment)
+                    askUser()
+                });
+                
               // code block
           break;
             case "Add Employee":
-                // code block
+                return inquirer.prompt([ {
+                    type: "input",
+                    name: "firstname",
+                    message: "What is the first name of the new employee?"
+                  },
+                  {
+                    type: "input",
+                    name: "lastname",
+                    message: "WWhat is the last name of the new employee?"
+                  },
+                  {
+                    type: "list",
+                    name: "employeeRole",
+                    message: "What employeeRole number does the new employee have?",
+                    
+                  },
+            ]).then((answer) => {
+                    createEmployee(answer.rolename,answer.rolesalary, answer.roledepartment)
+                    askUser()
+                });
                break;
             case "Update Employee Role":
                 // code block

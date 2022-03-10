@@ -10,7 +10,7 @@ async function seed() {
 
     await deleteAllDepartments();
     await deleteAllRoles();
-     await deleteAllEmployees();
+    await deleteAllEmployees();
      //seed department
      const numOfDepartments = 4
     for (let index = 0; index <numOfDepartments; index++){

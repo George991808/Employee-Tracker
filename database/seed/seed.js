@@ -10,11 +10,11 @@ async function seed() {
 
     await deleteAllDepartments();
     await deleteAllRoles();
-    // await deleteAllEmployees();
+     await deleteAllEmployees();
      //seed department
      const numOfDepartments = 4
     for (let index = 0; index <numOfDepartments; index++){
-            await createDepartment(faker.commerce.department());
+            await createDepartment(faker.name.jobArea());
         }
     //seed roles
     const numOfRoles = 6
@@ -24,17 +24,17 @@ async function seed() {
     
 
     // //create managers
-    // const numOfManagers = 3
-    // for (let index = 0; index <numOfManagers; index++){
-    //     await createEmployees(faker.name.firstName(),faker.name.lastName(),getRandomInt(numOfRoles));
-    // }
+    const numOfManagers = 3
+    for (let index = 0; index <numOfManagers; index++){
+        await createEmployee(faker.name.firstName(),faker.name.lastName(),getRandomInt(numOfRoles),null);
+    }
     // //seed employees
-    // const numOfEmployees = 8
-    // for (let index = 0; index <numOfEmployees; index++){
-    //     await createEmployees(faker.name.firstName(),faker.name.lastName(),getRandomInt(numOfRoles),getRandomInt(numOfManagers));
-    // }
+    const numOfEmployees = 8
+    for (let index = 0; index <numOfEmployees; index++){
+        await createEmployee(faker.name.firstName(),faker.name.lastName(),getRandomInt(numOfRoles),getRandomInt(numOfManagers));
+    }
 }
 function getRandomInt(max) {
-    return Math.max(Math.floor(Math.random() * max),1);
+    return Math.max(Math.round(Math.random() * max),1);
   }
 seed();

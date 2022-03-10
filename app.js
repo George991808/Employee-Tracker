@@ -1,8 +1,8 @@
 
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
-const {createRole, getRoles} = require("./src/roles");
-const {createEmployee, getEmployees} = require("./src/employees")
+// const {createRole, getRoles} = require("./src/roles");
+// const {createEmployee, getEmployees} = require("./src/employees")
 const connectDb = require("./database/connect");
 // const askUser = require("./src/questions");
 
@@ -29,6 +29,7 @@ function askUser(){
                 getDepartments();
                break;
             case "View All Roles":
+                getRoles();
               // code block
            break;
             case "View All Employees":
@@ -54,30 +55,23 @@ function askUser(){
 async function getDepartments(){
     
  const connection= await connectDb();
-
-    // console.log("3")
-    //  db.query('SELECT * FROM departments;', function (err, results) {
-    // if (err) console.log(err);   
-    const [rows, fields] = await connection.execute('SELECT * FROM `departments`');
+ 
+    const [rows, fields] = await connection.execute('SELECT id, name FROM departments')
     console.table(rows);
     askUser();
    connection.end();
-    // test();
-    
-    //   });
-    // const results = db.execute("SELECT * FROM `employee_management`.`departments`;");
-    // console.log("4")
-    // return results;
 }
+async function getRoles(){
+    
+    const connection= await connectDb();
+    
+       const [rows, fields] = await connection.execute('SELECT roles.id, roles.title, departments.name AS departments, salary FROM roles LEFT JOIN departments on roles.department_id = departments.id;');
+       console.table(rows);
+       askUser();
+      connection.end();
+   }
 
-// function viewDepartments() {
-//     getDepartments();
-//  //   console.log(getDepartments())
-//  //       console.table(getDepartments());
-//         // askUser();
-   
-   
-//    }
+
 module.exports = askUser;
 
 

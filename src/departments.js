@@ -9,7 +9,10 @@ const connectDb = require("../database/connect");
 async function createDepartment(name){
     const connection =   await connectDb();
 
-    const [rows] =  await connection.execute('INSERT INTO `departments` (`name`) VALUES (?)', [name]);
+    const [rows] =  await connection.execute(
+        'INSERT INTO `departments` (`name`) VALUES (?)', 
+        [name]
+    );
     return(1);
 }
 /**

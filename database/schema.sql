@@ -3,12 +3,12 @@ CREATE SCHEMA `employee_management` ;
  -- create dept
 CREATE TABLE `employee_management`.`departments` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(30) NOT NULL,
+  `name` VARCHAR(200) NOT NULL,
   PRIMARY KEY (`id`));
  -- create roles
 CREATE TABLE `employee_management`.`roles` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(30) NOT NULL,
+  `title` VARCHAR(200) NOT NULL,
   `salary` DECIMAL NOT NULL,
   `department_id` INT UNSIGNED NULL,
   PRIMARY KEY (`id`),
@@ -21,8 +21,8 @@ CREATE TABLE `employee_management`.`roles` (
  -- create employees
 CREATE TABLE `employee_management`.`employees` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `first_name` VARCHAR(30) NOT NULL,
-  `last_name` VARCHAR(30) NOT NULL,
+  `first_name` VARCHAR(200) NOT NULL,
+  `last_name` VARCHAR(200) NOT NULL,
   `role_id` INT UNSIGNED NULL,
   `manager_id` INT UNSIGNED NULL,
   PRIMARY KEY (`id`),

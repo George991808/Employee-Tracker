@@ -2,7 +2,7 @@ const inquirer = require('inquirer');
 
 function askUser(){
     return inquirer.prompt([{
-        message: "hello",
+        message: "What would you like to do",
         type: 'list',
         choices: [
             'View all departments',

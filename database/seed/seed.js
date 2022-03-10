@@ -1,17 +1,40 @@
 const {createDepartment, deleteAllDepartments} = require("../../src/departments");
+const {createRole, deleteAllRoles} = require("../../src/roles");
+const {createEmployee, deleteAllEmployees} = require("../../src/employees");
 const {faker} = require('@faker-js/faker');
 const connectDb = require("../connect");
 
 async function seed() {
-    //seed departmnet
+   
     
 
     await deleteAllDepartments();
-    for (let index = 0; index <10; index++){
+    await deleteAllRoles();
+    // await deleteAllEmployees();
+     //seed department
+     const numOfDepartments = 4
+    for (let index = 0; index <numOfDepartments; index++){
             await createDepartment(faker.commerce.department());
         }
     //seed roles
+    const numOfRoles = 6
+    for (let index = 0; index <numOfRoles; index++){
+        await createRole(faker.name.jobTitle(),Math.random()*100000+35000,getRandomInt(numOfDepartments));
+    }
+    
 
-    //seed employees
+    // //create managers
+    // const numOfManagers = 3
+    // for (let index = 0; index <numOfManagers; index++){
+    //     await createEmployees(faker.name.firstName(),faker.name.lastName(),getRandomInt(numOfRoles));
+    // }
+    // //seed employees
+    // const numOfEmployees = 8
+    // for (let index = 0; index <numOfEmployees; index++){
+    //     await createEmployees(faker.name.firstName(),faker.name.lastName(),getRandomInt(numOfRoles),getRandomInt(numOfManagers));
+    // }
 }
+function getRandomInt(max) {
+    return Math.max(Math.floor(Math.random() * max),1);
+  }
 seed();

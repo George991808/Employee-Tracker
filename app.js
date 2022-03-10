@@ -38,6 +38,14 @@ function askUser(){
               // code block
           break;
             case "Add Department":
+                return inquirer.prompt([{
+                    message: "What is the new departments name?",
+                    type: 'input',
+                  
+                    name: 'name'
+                }]).then((answer) => {
+                    createDepartment(answer.name)
+                });
               // code block
            break;
             case "Add Role":
